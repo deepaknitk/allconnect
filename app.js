@@ -19,7 +19,7 @@ var userProfile = require('./routes/userProfile');
 
 var app = express();
 
-var cors = require('cors')
+var cors = require('cors');
 app.use(cors());
 
 

@@ -11,6 +11,7 @@ export const signUpAction = (signUpReqBody) => dispatch => {
                     payload: response.data
                 })
             }
+
             else {
                 dispatch(messageAction.setErrorMessage('user not saved'));
             }
