@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import Header from './components/header';
-import Footer from './components/footer';
 import Home from './components/home';
 import PageNotFound from './components/pageNotFound';
-import login from './components/login';
 import Dashboard from './components/dashboard';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import './App.css';

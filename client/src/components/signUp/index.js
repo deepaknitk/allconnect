@@ -5,7 +5,7 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import Dialog from "material-ui/Dialog";
 import React from "react";
 import { connect } from 'react-redux';
-import {signUpAction, successAction, failureAction} from '../../action/signUpAction'
+import {signUpAction} from '../../action/signUpAction'
 import SnackBar from "../snackbar";
 
 class SignUp extends Component {

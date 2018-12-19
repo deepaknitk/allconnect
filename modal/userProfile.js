@@ -24,5 +24,21 @@ var userProfile = new Schema({
     }
 });
 
+
+var loginSchema = new Schema({
+    userEmail: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    }
+});
+
 let user = mongoose.model('user', userProfile);
+let login = mongoose.model('login', loginSchema);
+
 module.exports = user;
+module.exports = login;
+

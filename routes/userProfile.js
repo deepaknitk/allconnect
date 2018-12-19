@@ -1,12 +1,12 @@
 let express = require('express');
 let router = express.Router();
 let userProfileModal = require('../modal/userProfile');
-let userProfileValidation = require('../validation/userProfile');
+let loginModal = require('../modal/userProfile');
+let {userProfile, login} = require('../validation/Auth');
 
 
 
 //test get request
-debugger
 router.get('/tt', function (req, res) {
     res.json({test: 'test'});
 });
@@ -17,7 +17,7 @@ router.get('/tt', function (req, res) {
 /* Register new user, post method */
 router.post('/create', function(req, res, next) {
     console.log('called!!');
-  const errors = userProfileValidation(req.body);
+  const errors = userProfile(req.body);
   if(Object.keys(errors).length) {
     const response = {};
     response.success = false;
@@ -72,5 +72,49 @@ router.post('/create', function(req, res, next) {
           });
   }
 });
+
+
+router.post('/login', function (req,res) {
+   const errors =  login(req.body);
+   if(!errors) {
+       const res = {
+           success: false,
+           data: errors
+       };
+       res.json({res});
+   }
+   else {
+       const {userEmail, password} = req.body;
+       loginModal.findOne({userEmail})
+           .then(user => {
+               if(!user) {
+                   res.json({
+                       success: false,
+                       errorMessage: 'User Not found',
+                       data: {}
+                   })
+               }
+               else {
+                   if(user.password !== password) {
+                       res.json({
+                           success: false,
+                           errorMessage: 'Password is not valid',
+                           data: {}
+                       })
+                   }
+                   else {
+                       res.json({
+                           success: true,
+                           errorMessage: '',
+                           data: user
+                       })
+                   }
+               }
+           })
+           .catch(error => console.log(error));
+   }
+});
+
+
 
 module.exports = router;
